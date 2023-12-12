@@ -349,16 +349,18 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 }
 
 extension OnboardingUICoordinator: TherapySettingsViewModelDelegate {
+
     func syncBasalRateSchedule(items: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
     }
     
-    func syncDeliveryLimits(deliveryLimits: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
+    func syncDeliveryLimits(deliveryLimits: LoopKit.DeliveryLimits) async throws -> LoopKit.DeliveryLimits {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
+        return deliveryLimits
     }
-    
+
     func saveCompletion(therapySettings: TherapySettings) {
         stepFinished()
     }
