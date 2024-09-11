@@ -19,10 +19,13 @@ struct WelcomeView: View {
             Text(LocalizedString("Welcome to Loop", comment: "Title on WelcomeView"))
                 .font(.largeTitle)
                 .fontWeight(.semibold)
+            
             Image(frameworkImage: "Loop", decorative: true)
                 .onLongPressGesture(minimumDuration: 2) {
                     didLongPressOnLogo?()
                 }
+                .accessibilityHidden(false)
+                .accessibilityIdentifier("loopLogo")
 
             Text(LocalizedString("Before using Loop you need to configure a few settings. These settings should be entered with precision and care; they are a critical part of how Loop determines the right amount of insulin to deliver.\n\nIf you are new to Loop, work with your diabetes support team to determine the settings that work best for you.", comment: "Descriptive text on WelcomeView"))
                 .foregroundColor(.secondary)
