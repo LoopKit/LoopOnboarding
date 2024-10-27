@@ -13,6 +13,7 @@ import SwiftUI
 import LoopKit
 import LoopKitUI
 import NightscoutServiceKit
+import NightscoutServiceKitUI
 import LoopSupportKitUI
 import LoopAlgorithm
 
@@ -272,20 +273,16 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private func setupWithNightscout() {
         LoopKitAnalytics.shared.recordAnalyticsEvent("Onboarding With Nightscout", withProperties: nil, outOfSession: false)
-        switch onboardingProvider.onboardService(withIdentifier: OnboardingUICoordinator.serviceIdentifier) {
-        case .failure(let error):
-            log.debug("Failure to create and setup service with identifier '%{public}@': %{public}@", OnboardingUICoordinator.serviceIdentifier, String(describing: error))
-        case .success(let success):
-            switch success {
-            case .userInteractionRequired(var setupViewController):
-                nightscoutOnboardingViewController = setupViewController
-                setupViewController.serviceOnboardingDelegate = self
-                setupViewController.completionDelegate = self
-                show(setupViewController, sender: self)
-            case .createdAndOnboarded(let service):
-                self.service = service
-                checkForAvailableSettingsImport()
-            }
+        let result = NightscoutService.setupViewController(colorPalette: colorPalette, pluginHost: onboardingProvider)
+        switch result {
+        case .userInteractionRequired(var setupViewController):
+            nightscoutOnboardingViewController = setupViewController
+            setupViewController.serviceOnboardingDelegate = self
+            setupViewController.completionDelegate = self
+            show(setupViewController, sender: self)
+        case .createdAndOnboarded(let service):
+            self.service = service
+            checkForAvailableSettingsImport()
         }
     }
 
