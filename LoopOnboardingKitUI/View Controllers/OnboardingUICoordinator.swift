@@ -273,7 +273,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private func setupWithNightscout() {
         LoopKitAnalytics.shared.recordAnalyticsEvent("Onboarding With Nightscout", withProperties: nil, outOfSession: false)
-        let result = NightscoutService.setupViewController(colorPalette: colorPalette, pluginHost: onboardingProvider)
+        let result = NightscoutService.setupViewController(colorPalette: colorPalette, pluginHost: onboardingProvider, allowDebugFeatures: onboardingProvider.allowDebugFeatures)
         switch result {
         case .userInteractionRequired(var setupViewController):
             nightscoutOnboardingViewController = setupViewController
