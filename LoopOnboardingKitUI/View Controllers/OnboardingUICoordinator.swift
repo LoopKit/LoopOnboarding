@@ -13,7 +13,9 @@ import SwiftUI
 import LoopKit
 import LoopKitUI
 import NightscoutServiceKit
+import NightscoutServiceKitUI
 import LoopSupportKitUI
+import LoopAlgorithm
 
 enum OnboardingScreen: CaseIterable {
     case welcome
@@ -271,20 +273,16 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private func setupWithNightscout() {
         LoopKitAnalytics.shared.recordAnalyticsEvent("Onboarding With Nightscout", withProperties: nil, outOfSession: false)
-        switch onboardingProvider.onboardService(withIdentifier: OnboardingUICoordinator.serviceIdentifier) {
-        case .failure(let error):
-            log.debug("Failure to create and setup service with identifier '%{public}@': %{public}@", OnboardingUICoordinator.serviceIdentifier, String(describing: error))
-        case .success(let success):
-            switch success {
-            case .userInteractionRequired(var setupViewController):
-                nightscoutOnboardingViewController = setupViewController
-                setupViewController.serviceOnboardingDelegate = self
-                setupViewController.completionDelegate = self
-                show(setupViewController, sender: self)
-            case .createdAndOnboarded(let service):
-                self.service = service
-                checkForAvailableSettingsImport()
-            }
+        let result = NightscoutService.setupViewController(colorPalette: colorPalette, pluginHost: onboardingProvider, allowDebugFeatures: onboardingProvider.allowDebugFeatures)
+        switch result {
+        case .userInteractionRequired(var setupViewController):
+            nightscoutOnboardingViewController = setupViewController
+            setupViewController.serviceOnboardingDelegate = self
+            setupViewController.completionDelegate = self
+            show(setupViewController, sender: self)
+        case .createdAndOnboarded(let service):
+            self.service = service
+            checkForAvailableSettingsImport()
         }
     }
 
@@ -349,16 +347,18 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 }
 
 extension OnboardingUICoordinator: TherapySettingsViewModelDelegate {
+
     func syncBasalRateSchedule(items: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
     }
     
-    func syncDeliveryLimits(deliveryLimits: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
+    func syncDeliveryLimits(deliveryLimits: LoopKit.DeliveryLimits) async throws -> LoopKit.DeliveryLimits {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
+        return deliveryLimits
     }
-    
+
     func saveCompletion(therapySettings: TherapySettings) {
         stepFinished()
     }
