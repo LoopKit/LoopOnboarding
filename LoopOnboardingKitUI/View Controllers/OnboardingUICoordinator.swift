@@ -302,7 +302,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
                 dailyItems: [.init(startTime: 0, value: 50)],
                 timeZone: .currentFixed),
             carbRatioSchedule: CarbRatioSchedule(
-                unit: .gram(),
+                unit: .gram,
                 dailyItems: [.init(startTime: 0, value: 15)],
                 timeZone: .currentFixed),
             basalRateSchedule: BasalRateSchedule(
