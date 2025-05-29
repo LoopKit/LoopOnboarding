@@ -53,7 +53,7 @@ public final class LoopOnboardingUI: OnboardingUI {
         ]
     }
 
-    public func onboardingViewController(onboardingProvider: OnboardingProvider, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette, adultChildInsulinModelSelectionEnabled: Bool) -> (UIViewController & OnboardingViewController) {
+    public func onboardingViewController(onboardingProvider: OnboardingProvider, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette) -> (UIViewController & OnboardingViewController) {
         return OnboardingUICoordinator(onboarding: self, onboardingProvider: onboardingProvider, initialTherapySettings: onboardingProvider.onboardingTherapySettings, displayGlucosePreference: displayGlucosePreference, colorPalette: colorPalette)
     }
 
