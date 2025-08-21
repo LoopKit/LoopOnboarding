@@ -461,8 +461,5 @@ extension TherapySettings {
         {
             correctionRangeOverrides?.ranges[.preMeal] = nil
         }
-
-        // workout mode obviated in DIY by overrides
-        correctionRangeOverrides?.ranges[.workout] = nil
     }
 }
