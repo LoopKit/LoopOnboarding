@@ -35,7 +35,7 @@
 "Share With Apple Health" = "Udostępnianie w Apple Zdrowie";
 
 /* Button title for choosing onboarding with nightscout */
-"Use Nightscout with Loop" = "Użyj Nightscout z pętlą";
+"Use Nightscout with Loop" = "Dodaj Nightscout do pętli";
 
 /* Format string for main guidance text on ImportSettingsView (1: age of settings) */
 "We've detected Loop settings stored in your Nightscout! They were last updated %1$@. Would you like to import them?\n\nAfter importing, you will still need to review the imported settings in the following screens and verify that they are correct." = "Wykryliśmy ustawienia pętli zapisane w Twoim Nightscout! Zostały one ostatnio zaktualizowane %1$@. Czy chcesz je zaimportować?\n\nZaimportowane ustawienia będą wymagały weryfikacji w kolejnych etapach.";
