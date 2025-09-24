@@ -143,6 +143,12 @@
             "state" : "translated",
             "value" : "Apple Sağlık, Loop'tan alınan kan şekeri, insülin ve karbonhidrat verilerini saklamak için kullanılabilir.\n\nLoop'a izin verirseniz,  Apple Sağlık'ı destekleyen glukometrelerden ve insülin kalemlerinden gelen KŞ ve insülin verilerini de okuyabilir"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 健康（Apple Health）可用于存储来自 Loop 的血糖、胰岛素和碳水化合物数据。\n\n如果您授予权限，Loop 还可从支持 Apple 健康的血糖仪和胰岛素注射笔中读取血糖和胰岛素数据。"
+          }
         }
       }
     },
@@ -213,6 +219,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loop'u kullanmadan önce birkaç ayarı yapılandırmanız gerekir. Bu ayarlar hassasiyet ve özenle girilmelidir. Bu ayarlar ve veriler Loop'un verilecek doğru insülin miktarını nasıl belirlediğinin kritik bir parçasıdır.\n\nLoop'ta yeniyseniz, size en uygun ayarları belirlemek için diyabet destek ekibinizle birlikte çalışın."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在使用 Loop 之前，您需要先配置一些设置。这些设置对 Loop 判断胰岛素输注剂量至关重要，必须准确、谨慎地填写。\n\n如果您是第一次使用 Loop，建议在糖尿病管理团队的指导下确定最适合您的设置参数。"
           }
         }
       }
@@ -427,6 +439,12 @@
             "state" : "translated",
             "value" : "Hadi başlayalım!"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始！"
+          }
         }
       }
     },
@@ -497,6 +515,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loop, uzaktan takip edenlerin programın ne yaptığını görmeleri için Nightscout ile birlikte çalışabilir. Nightscout kullanımı tamamen isteğe bağlıdır ve daha sonra da kurabilirsiniz."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loop 可以与 Nightscout 配合使用，让远程护理人员能够查看 Loop 的运行情况。Nightscout 的使用完全由 Loop 决定，您可以随时进行设置。"
           }
         }
       }
@@ -836,6 +860,12 @@
             "state" : "translated",
             "value" : "Nightscout Olmadan Kurulum"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不使用 Nightscout 设置 Loop"
+          }
         }
       }
     },
@@ -907,6 +937,12 @@
             "state" : "translated",
             "value" : "Apple Sağlık ile Paylaş"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "与 Apple Health 分享"
+          }
         }
       }
     },
@@ -977,6 +1013,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nightscout'u Loop ile kullanın"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Loop 上使用 Nightscout"
           }
         }
       }
@@ -1119,6 +1161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loop'a hoş geldiniz"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎来到 Loop"
           }
         }
       }
