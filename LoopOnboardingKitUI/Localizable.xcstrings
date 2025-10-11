@@ -718,6 +718,12 @@
             "state" : "translated",
             "value" : "Ayarları kaydet"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存设置"
+          }
         }
       }
     },
@@ -864,7 +870,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不使用 Nightscout 设置 Loop"
+            "value" : "在不使用 Nightscout 的情况下设置 Loop"
           }
         }
       }
@@ -1018,7 +1024,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在 Loop 上使用 Nightscout"
+            "value" : "将 Nightscout 与 Loop 搭配使用"
           }
         }
       }
