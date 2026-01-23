@@ -185,7 +185,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
             let view = CorrectionRangeOverrideInformationView(preset: .preMeal, onExit: { [weak self] in self?.stepFinished() })
             return hostingController(rootView: view)
         case .correctionRangePreMealOverrideEditor:
-            let view = CorrectionRangeOverridesEditor(mode: .acceptanceFlow, therapySettingsViewModel: therapySettingsViewModel!, preset: .preMeal)
+            let view = CorrectionRangeOverridesEditor(therapySettingsViewModel: therapySettingsViewModel!, preset: .preMeal)
             return hostingController(rootView: view)
         case .basalRatesInfo:
             let view = BasalRatesInformationView(onExit: { [weak self] in self?.stepFinished() })
