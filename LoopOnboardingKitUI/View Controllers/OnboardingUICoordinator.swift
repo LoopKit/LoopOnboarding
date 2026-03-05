@@ -67,6 +67,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private let displayGlucosePreference: DisplayGlucosePreference
     private let colorPalette: LoopUIColorPalette
+    private let dosingStrategySelectionEnabled: Bool
 
     private var screenStack = [OnboardingScreen]()
     private var currentScreen: OnboardingScreen { return screenStack.last! }
@@ -79,12 +80,13 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private static let serviceIdentifier = "NightscoutService"
 
-    init(onboarding: LoopOnboardingUI, onboardingProvider: OnboardingProvider, initialTherapySettings: TherapySettings, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette) {
+    init(onboarding: LoopOnboardingUI, onboardingProvider: OnboardingProvider, initialTherapySettings: TherapySettings, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette, dosingStrategySelectionEnabled: Bool) {
         self.onboarding = onboarding
         self.onboardingProvider = onboardingProvider
         self.initialTherapySettings = initialTherapySettings
         self.displayGlucosePreference = displayGlucosePreference
         self.colorPalette = colorPalette
+        self.dosingStrategySelectionEnabled = dosingStrategySelectionEnabled
         self.service = onboardingProvider.activeServices.first(where: { $0.pluginIdentifier == OnboardingUICoordinator.serviceIdentifier })
 
         super.init(navigationBarClass: UINavigationBar.self, toolbarClass: UIToolbar.self)
@@ -230,6 +232,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
         let rootView = rootView
             .environmentObject(displayGlucosePreference)
             .environment(\.appName, Bundle.main.bundleDisplayName)
+            .environment(\.dosingStrategySelectionEnabled, dosingStrategySelectionEnabled)
         let hostingController = DismissibleHostingController(content: rootView, colorPalette: colorPalette)
         return hostingController
     }

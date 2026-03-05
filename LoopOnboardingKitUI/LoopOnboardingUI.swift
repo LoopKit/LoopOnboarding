@@ -53,8 +53,8 @@ public final class LoopOnboardingUI: OnboardingUI {
         ]
     }
 
-    public func onboardingViewController(onboardingProvider: OnboardingProvider, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette) -> (UIViewController & OnboardingViewController) {
-        return OnboardingUICoordinator(onboarding: self, onboardingProvider: onboardingProvider, initialTherapySettings: onboardingProvider.onboardingTherapySettings, displayGlucosePreference: displayGlucosePreference, colorPalette: colorPalette)
+    public func onboardingViewController(onboardingProvider: OnboardingProvider, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette, dosingStrategySelectionEnabled: Bool) -> (UIViewController & OnboardingViewController) {
+        return OnboardingUICoordinator(onboarding: self, onboardingProvider: onboardingProvider, initialTherapySettings: onboardingProvider.onboardingTherapySettings, displayGlucosePreference: displayGlucosePreference, colorPalette: colorPalette, dosingStrategySelectionEnabled: dosingStrategySelectionEnabled)
     }
 
     private func notifyDidUpdateState() {
