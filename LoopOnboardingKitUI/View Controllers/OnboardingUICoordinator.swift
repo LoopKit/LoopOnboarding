@@ -8,12 +8,13 @@
 
 import os.log
 import Foundation
-import HealthKit
 import SwiftUI
 import LoopKit
 import LoopKitUI
 import NightscoutServiceKit
+import NightscoutServiceKitUI
 import LoopSupportKitUI
+import LoopAlgorithm
 
 enum OnboardingScreen: CaseIterable {
     case welcome
@@ -66,6 +67,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private let displayGlucosePreference: DisplayGlucosePreference
     private let colorPalette: LoopUIColorPalette
+    private let dosingStrategySelectionEnabled: Bool
 
     private var screenStack = [OnboardingScreen]()
     private var currentScreen: OnboardingScreen { return screenStack.last! }
@@ -78,12 +80,13 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private static let serviceIdentifier = "NightscoutService"
 
-    init(onboarding: LoopOnboardingUI, onboardingProvider: OnboardingProvider, initialTherapySettings: TherapySettings, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette) {
+    init(onboarding: LoopOnboardingUI, onboardingProvider: OnboardingProvider, initialTherapySettings: TherapySettings, displayGlucosePreference: DisplayGlucosePreference, colorPalette: LoopUIColorPalette, dosingStrategySelectionEnabled: Bool) {
         self.onboarding = onboarding
         self.onboardingProvider = onboardingProvider
         self.initialTherapySettings = initialTherapySettings
         self.displayGlucosePreference = displayGlucosePreference
         self.colorPalette = colorPalette
+        self.dosingStrategySelectionEnabled = dosingStrategySelectionEnabled
         self.service = onboardingProvider.activeServices.first(where: { $0.pluginIdentifier == OnboardingUICoordinator.serviceIdentifier })
 
         super.init(navigationBarClass: UINavigationBar.self, toolbarClass: UIToolbar.self)
@@ -184,7 +187,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
             let view = CorrectionRangeOverrideInformationView(preset: .preMeal, onExit: { [weak self] in self?.stepFinished() })
             return hostingController(rootView: view)
         case .correctionRangePreMealOverrideEditor:
-            let view = CorrectionRangeOverridesEditor(mode: .acceptanceFlow, therapySettingsViewModel: therapySettingsViewModel!, preset: .preMeal)
+            let view = CorrectionRangeOverridesEditor(therapySettingsViewModel: therapySettingsViewModel!, preset: .preMeal)
             return hostingController(rootView: view)
         case .basalRatesInfo:
             let view = BasalRatesInformationView(onExit: { [weak self] in self?.stepFinished() })
@@ -229,6 +232,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
         let rootView = rootView
             .environmentObject(displayGlucosePreference)
             .environment(\.appName, Bundle.main.bundleDisplayName)
+            .environment(\.dosingStrategySelectionEnabled, dosingStrategySelectionEnabled)
         let hostingController = DismissibleHostingController(content: rootView, colorPalette: colorPalette)
         return hostingController
     }
@@ -271,20 +275,16 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private func setupWithNightscout() {
         LoopKitAnalytics.shared.recordAnalyticsEvent("Onboarding With Nightscout", withProperties: nil, outOfSession: false)
-        switch onboardingProvider.onboardService(withIdentifier: OnboardingUICoordinator.serviceIdentifier) {
-        case .failure(let error):
-            log.debug("Failure to create and setup service with identifier '%{public}@': %{public}@", OnboardingUICoordinator.serviceIdentifier, String(describing: error))
-        case .success(let success):
-            switch success {
-            case .userInteractionRequired(var setupViewController):
-                nightscoutOnboardingViewController = setupViewController
-                setupViewController.serviceOnboardingDelegate = self
-                setupViewController.completionDelegate = self
-                show(setupViewController, sender: self)
-            case .createdAndOnboarded(let service):
-                self.service = service
-                checkForAvailableSettingsImport()
-            }
+        let result = NightscoutService.setupViewController(colorPalette: colorPalette, pluginHost: onboardingProvider, allowDebugFeatures: onboardingProvider.allowDebugFeatures)
+        switch result {
+        case .userInteractionRequired(var setupViewController):
+            nightscoutOnboardingViewController = setupViewController
+            setupViewController.serviceOnboardingDelegate = self
+            setupViewController.completionDelegate = self
+            show(setupViewController, sender: self)
+        case .createdAndOnboarded(let service):
+            self.service = service
+            checkForAvailableSettingsImport()
         }
     }
 
@@ -304,7 +304,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
                 dailyItems: [.init(startTime: 0, value: 50)],
                 timeZone: .currentFixed),
             carbRatioSchedule: CarbRatioSchedule(
-                unit: .gram(),
+                unit: .gram,
                 dailyItems: [.init(startTime: 0, value: 15)],
                 timeZone: .currentFixed),
             basalRateSchedule: BasalRateSchedule(
@@ -344,21 +344,23 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
 
     private func constructTherapySettingsViewModel(therapySettings: TherapySettings) -> TherapySettingsViewModel? {
-        return TherapySettingsViewModel(therapySettings: therapySettings, pumpSupportedIncrements: nil, sensitivityOverridesEnabled: true, prescription: nil, delegate: self)
+        return TherapySettingsViewModel(therapySettings: therapySettings, pumpSupportedIncrements: nil, prescription: nil, delegate: self)
     }
 }
 
 extension OnboardingUICoordinator: TherapySettingsViewModelDelegate {
+
     func syncBasalRateSchedule(items: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
     }
     
-    func syncDeliveryLimits(deliveryLimits: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
+    func syncDeliveryLimits(deliveryLimits: LoopKit.DeliveryLimits) async throws -> LoopKit.DeliveryLimits {
         // Since pump isn't set up, this syncing shouldn't do anything
         assertionFailure()
+        return deliveryLimits
     }
-    
+
     func saveCompletion(therapySettings: TherapySettings) {
         stepFinished()
     }
@@ -462,8 +464,5 @@ extension TherapySettings {
         {
             correctionRangeOverrides?.ranges[.preMeal] = nil
         }
-
-        // workout mode obviated in DIY by overrides
-        correctionRangeOverrides?.ranges[.workout] = nil
     }
 }

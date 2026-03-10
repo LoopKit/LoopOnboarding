@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import HealthKit
 import LoopKitUI
 
 struct AppleHealthAuthView: View {
