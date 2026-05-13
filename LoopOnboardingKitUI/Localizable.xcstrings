@@ -1097,6 +1097,12 @@
             "state" : "translated",
             "value" : "Nightscout'unuzda saklanan Loop ayarlarını tespit ettik! En son %1$@ olarak güncellenmişler. Onları içe aktarmak ister misiniz?\n\nİçe aktardıktan sonra, aşağıdaki ekranlarda içe aktarılan ayarları gözden geçirmeniz ve doğrulamanız gerekecektir."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我们在您的 Nightscout 中检测到了已保存的 Loop 设置！这些设置最后更新于 %1$@。是否要导入？\n导入后，您仍需要在接下来的页面中检查已导入的设置，并确认其内容正确无误。"
+          }
         }
       }
     },
@@ -1172,7 +1178,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "欢迎来到 Loop"
+            "value" : "欢迎使用 Loop"
           }
         }
       }

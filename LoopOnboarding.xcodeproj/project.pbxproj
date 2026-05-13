@@ -429,9 +429,9 @@
 				ar,
 				cs,
 				sk,
-				ce,
 				hu,
 				uk,
+				ko,
 			);
 			mainGroup = A936A88E25BC98DA0085119C;
 			productRefGroup = A936A89925BC98DA0085119C /* Products */;
