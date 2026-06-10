@@ -34,6 +34,7 @@
 		C1463F7B2868B54200CFD57F /* LoopOnboardingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A936A8B925BC99240085119C /* LoopOnboardingKit.framework */; platformFilter = ios; };
 		C1463F7C2868B54200CFD57F /* LoopOnboardingKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A936A8B925BC99240085119C /* LoopOnboardingKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C14A7E78295E563D00CD87B4 /* LoopSupportKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C14A7E77295E563D00CD87B4 /* LoopSupportKitUI.framework */; };
+		C1F00D01295E563D00CD87B4 /* NightscoutServiceKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F00D02295E563D00CD87B4 /* NightscoutServiceKitUI.framework */; };
 		C16121EB27C457C400BCDE2A /* ImportSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16121EA27C457C400BCDE2A /* ImportSettingsView.swift */; };
 		C1C1349A27DD37C80097B5AD /* NightscoutServiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1C1349927DD37C80097B5AD /* NightscoutServiceKit.framework */; };
 		C1C134A327DD38310097B5AD /* NightscoutServiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1C134A227DD38310097B5AD /* NightscoutServiceKit.framework */; };
@@ -124,6 +125,7 @@
 		A9CE7FF225BCAC1800C04F9B /* LoopOnboardingPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopOnboardingPlugin.swift; sourceTree = "<group>"; };
 		B66D1F782E6A83FD00471149 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C14A7E77295E563D00CD87B4 /* LoopSupportKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopSupportKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1F00D02295E563D00CD87B4 /* NightscoutServiceKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NightscoutServiceKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16121EA27C457C400BCDE2A /* ImportSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportSettingsView.swift; sourceTree = "<group>"; };
 		C1C1349927DD37C80097B5AD /* NightscoutServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NightscoutServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1C134A227DD38310097B5AD /* NightscoutServiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NightscoutServiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C14A7E78295E563D00CD87B4 /* LoopSupportKitUI.framework in Frameworks */,
+				C1F00D01295E563D00CD87B4 /* NightscoutServiceKitUI.framework in Frameworks */,
 				A9B3CDDB25BCB4D3002D9E92 /* LoopKit.framework in Frameworks */,
 				A9B3CDDD25BCB4D3002D9E92 /* LoopKitUI.framework in Frameworks */,
 				A9CE802725BCAF9800C04F9B /* LoopOnboardingKit.framework in Frameworks */,
@@ -271,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				C14A7E77295E563D00CD87B4 /* LoopSupportKitUI.framework */,
+				C1F00D02295E563D00CD87B4 /* NightscoutServiceKitUI.framework */,
 				C1C134A227DD38310097B5AD /* NightscoutServiceKit.framework */,
 				C1C1349927DD37C80097B5AD /* NightscoutServiceKit.framework */,
 				A9B3CDF725BCB6E6002D9E92 /* LoopKit.framework */,
