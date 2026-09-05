@@ -72,6 +72,12 @@
             "state" : "translated",
             "value" : "Apple Sağlık"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "苹果健康"
+          }
         }
       }
     },
@@ -297,6 +303,12 @@
             "state" : "translated",
             "value" : "Ayarları İçe Aktarma"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请勿导入设置"
+          }
         }
       }
     },
@@ -367,6 +379,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaydedilmiş Ayarları İçe Aktar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导入已保存的设置"
           }
         }
       }
@@ -647,6 +665,12 @@
             "state" : "translated",
             "value" : "Nightscout"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nightscout"
+          }
         }
       }
     },
@@ -794,6 +818,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ayarlar Bulundu"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "找到设置"
           }
         }
       }
