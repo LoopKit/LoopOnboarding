@@ -277,7 +277,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Instellingen Niet Importeren"
+            "value" : "Instellingen niet importeren"
           }
         },
         "pl" : {
@@ -354,7 +354,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Importeer Opgeslagen Instellingen"
+            "value" : "Importeer opgeslagen instellingen"
           }
         },
         "pl" : {
@@ -716,7 +716,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Instellingen Opslaan"
+            "value" : "Instellingen opslaan"
           }
         },
         "pl" : {
