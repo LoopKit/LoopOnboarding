@@ -37,6 +37,7 @@ struct WelcomeView: View {
                     .actionButtonStyle(.primary)
             }
         }
+        .frame(maxWidth: 600)
         .padding()
         .environment(\.horizontalSizeClass, .compact)
         .navigationBarTitle("")
