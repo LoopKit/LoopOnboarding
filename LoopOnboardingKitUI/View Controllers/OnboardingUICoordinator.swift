@@ -14,7 +14,6 @@ import LoopKitUI
 import NightscoutServiceKit
 import NightscoutServiceKitUI
 import LoopSupportKitUI
-import LoopAlgorithm
 
 enum OnboardingScreen: CaseIterable {
     case welcome
