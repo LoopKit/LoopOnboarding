@@ -60,8 +60,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
 
     private var nightscoutOnboardingViewController: UIViewController?
 
-    private var importedTherapySettings: TherapySettings?
-    private var importedTherapySettingsDate: Date?
+    private var importedTherapySettings: ImportedTherapySettings?
     private var shouldUseImportedSettings: Bool = false
 
     private let displayGlucosePreference: DisplayGlucosePreference
@@ -156,7 +155,8 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
             let view = OnboardingChooserView(setupWithNightscout: setupWithNightscout, setupWithoutNightscout: setupWithoutNightscout)
             return hostingController(rootView: view)
         case .importSettings:
-            let view = ImportSettingsView(settingsDate: importedTherapySettingsDate!) { [weak self] (shouldImport) in
+            let view = ImportSettingsView(importedTherapySettings: importedTherapySettings!) { [weak self] (shouldImport) in
+                self?.log.default("Settings from Nightscout %{public}@", shouldImport ? "imported" : "not imported")
                 self?.shouldUseImportedSettings = shouldImport
                 self?.stepFinished()
             }
@@ -164,7 +164,7 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
         case .suspendThresholdInfo:
             let therapySettings: TherapySettings
             if let importedTherapySettings = importedTherapySettings, shouldUseImportedSettings {
-                therapySettings = importedTherapySettings
+                therapySettings = importedTherapySettings.therapySettings
             } else {
                 therapySettings = initialTherapySettings
             }
@@ -325,11 +325,12 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
             nightscoutService.fetchStoredTherapySettings { result in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success((let settings, let date)):
-                        self.importedTherapySettings = settings
-                        self.importedTherapySettingsDate = date
+                    case .success(let importedTherapySettings):
+                        self.logImportOffer(importedTherapySettings)
+                        self.importedTherapySettings = importedTherapySettings
                         self.navigate(to: .importSettings)
-                    case .failure:
+                    case .failure(let error):
+                        self.log.error("No settings to import from Nightscout: %{public}@", String(describing: error))
                         // TODO: Show error? Maybe user was expecting import option and wants to know why it didn't show.
                         self.stepFinished()
                         break
@@ -341,6 +342,21 @@ class OnboardingUICoordinator: UINavigationController, CGMManagerOnboarding, Pum
         }
     }
 
+
+    private func logImportOffer(_ imported: ImportedTherapySettings) {
+        let therapySettings = imported.therapySettings
+        log.default("Settings from Nightscout of %{public}@ offered: %d profiles, active %{public}@, %d scheduled switches",
+                    String(describing: imported.date),
+                    therapySettings.therapyProfiles?.count ?? 0,
+                    TherapyProfiles.activeName(therapySettings.activeProfileName),
+                    therapySettings.scheduledSwitches?.count ?? 0)
+        for skipped in imported.skippedProfiles {
+            log.default("Profile %{public}@ not imported: %{public}@", skipped.name, skipped.reason)
+        }
+        for skipped in imported.skippedScheduledSwitches {
+            log.default("Scheduled switch %{public}@ not imported: %{public}@", skipped.name, skipped.reason)
+        }
+    }
 
     private func constructTherapySettingsViewModel(therapySettings: TherapySettings) -> TherapySettingsViewModel? {
         return TherapySettingsViewModel(therapySettings: therapySettings, pumpSupportedIncrements: nil, prescription: nil, delegate: self)
