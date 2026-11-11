@@ -4,6 +4,15 @@
     "" : {
 
     },
+    "%1$@ (active)" : {
+      "comment" : "Imported profile name of the active profile (1: profile name)"
+    },
+    "%1$@ (paused)" : {
+      "comment" : "Imported scheduled profile switch that is paused (1: scheduled switch description)"
+    },
+    "%1$@: %2$@" : {
+      "comment" : "A therapy profile or scheduled switch that will not be imported (1: profile name or scheduled switch description, 2: reason)"
+    },
     "Apple Health" : {
       "comment" : "Title on AppleHealthAuthView",
       "localizations" : {
@@ -674,6 +683,9 @@
         }
       }
     },
+    "Profiles: %1$@" : {
+      "comment" : "List of imported therapy profiles (1: profile names)"
+    },
     "Save Settings" : {
       "comment" : "Therapy settings save button title",
       "localizations" : {
@@ -750,6 +762,9 @@
           }
         }
       }
+    },
+    "Scheduled switches: %1$@\n\nEach switch first runs at its next time after the import. You can change or pause them under Settings → Profiles." : {
+      "comment" : "List of imported scheduled profile switches (1: scheduled switch descriptions)"
     },
     "Settings Found" : {
       "comment" : "Title on ImportSettingsView",
@@ -981,6 +996,12 @@
           }
         }
       }
+    },
+    "These profiles will not be imported:" : {
+      "comment" : "Heading of the therapy profiles that will not be imported"
+    },
+    "These scheduled switches will not be imported:" : {
+      "comment" : "Heading of the scheduled profile switches that will not be imported"
     },
     "Use Nightscout with Loop" : {
       "comment" : "Button title for choosing onboarding with nightscout",
